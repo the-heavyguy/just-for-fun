@@ -2,19 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>For My Someone Special ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>For You ❤️</title>
 
 <style>
   :root {
     --primary-pink: #ff4d6d;
-    --soft-pink: #ffb3c1;
     --dark-pink: #c9184a;
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
     margin: 0;
-    min-height: 100vh;
+    height: 100vh;
+    height: -webkit-fill-available;
     background: radial-gradient(circle at center, #fff0f3 0%, #ffb3c1 100%);
     display: flex;
     justify-content: center;
@@ -24,7 +29,6 @@
     color: #4a4a4a;
   }
 
-  /* Floating Hearts Background */
   .floating-hearts {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -33,85 +37,94 @@
   }
 
   .card {
-    background: rgba(255, 255, 255, 0.85);
-    padding: 40px 30px;
-    border-radius: 30px;
-    width: 90%;
-    max-width: 400px;
-    backdrop-filter: blur(15px);
-    box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px 20px;
+    border-radius: 25px;
+    width: 88%;
+    max-width: 360px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 25px rgba(255, 77, 109, 0.2);
     text-align: center;
     position: relative;
     z-index: 10;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: opacity 0.5s ease;
   }
 
-  h1 { font-size: 2em; color: var(--dark-pink); margin-bottom: 10px; }
-  p { font-size: 1.1em; line-height: 1.6; font-style: italic; }
+  h1 { font-size: 1.6em; color: var(--dark-pink); margin-top: 0; }
+  h3 { font-size: 1.1em; color: #666; margin-bottom: 15px; font-weight: normal;}
+  p { font-size: 1.05em; line-height: 1.5; font-style: italic; margin: 10px 0; }
 
   .heart-main {
-    font-size: 3.5em;
-    margin: 15px 0;
-    filter: drop-shadow(0 0 10px rgba(255, 77, 109, 0.5));
+    font-size: 3em;
+    margin: 10px 0;
     animation: heartbeat 1.2s infinite;
   }
 
-  .btn-container {
-    margin-top: 30px;
+  .interactive-area {
+    margin-top: 20px;
+    height: 200px;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    gap: 15px;
     position: relative;
-    min-height: 50px;
   }
 
   button {
-    padding: 12px 28px;
+    padding: 15px 30px;
     font-size: 1.1em;
     border-radius: 50px;
     border: none;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
     font-family: 'Segoe UI', sans-serif;
+    touch-action: none;
   }
 
   #yesBtn {
     background: var(--primary-pink);
     color: white;
-    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+    z-index: 10;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
   #noBtn {
     background: #f8f9fa;
     color: #888;
+    font-size: 0.9em;
+    padding: 10px 20px;
     position: absolute;
-    right: 20px;
+    bottom: 20px;
+    transition: left 0.2s ease, top 0.2s ease;
+    z-index: 5;
   }
 
   .terms-list {
     text-align: left;
-    font-size: 1em;
-    margin: 25px 0;
-    background: rgba(255, 77, 109, 0.05);
+    font-size: 0.92em;
+    margin: 15px 0;
+    background: rgba(255, 77, 109, 0.03);
     padding: 15px;
     border-radius: 15px;
-    line-height: 2;
+    line-height: 1.6;
+    border-left: 3px solid var(--primary-pink);
   }
 
-  .hidden { display: none; opacity: 0; }
+  .terms-item {
+    margin-bottom: 12px;
+    display: flex;
+    gap: 8px;
+  }
 
   @keyframes heartbeat {
-    0% { transform: scale(1); }
-    14% { transform: scale(1.1); }
-    28% { transform: scale(1); }
-    42% { transform: scale(1.1); }
-    70% { transform: scale(1); }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
   }
 
   @keyframes float {
-    0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    0% { transform: translateY(110vh) translateX(0); opacity: 1; }
+    100% { transform: translateY(-10vh) translateX(20px); opacity: 0; }
   }
 </style>
 </head>
@@ -121,53 +134,51 @@
 <div class="floating-hearts" id="heartPool"></div>
 
 <div id="step1" class="card">
-  <h1>To My Favorite Person ✨</h1>
-  <p>"In a world full of temporary things, you are a feeling I want to keep forever."</p>
+  <h1>Hey Beautiful ✨</h1>
+  <p>"Every time my phone glows, I hope it's a message from you."</p>
   <div class="heart-main">❤️</div>
-  <h2 style="color: #ff4d6d;">Will you be my Valentine?</h2>
+  <h2 style="color: #ff4d6d; font-size: 1.2em;">Will you be my Valentine?</h2>
 
-  <div class="btn-container" id="container">
-    <button id="yesBtn">Yes, Always ❤️</button>
+  <div class="interactive-area" id="container">
+    <button id="yesBtn">Yes! 🥰</button>
     <button id="noBtn">No</button>
   </div>
 </div>
 
-<div id="step2" class="card hidden" style="display:none;">
-  <h1>One Last Thing... 📝</h1>
-  <p>By clicking "I Do," you agree to a lifetime of:</p>
-
+<div id="step2" class="card" style="display:none; opacity:0;">
+  <h3>By clicking YES you agree to:</h3>
+  
   <div class="terms-list">
-    ✨ Late night conversations<br>
-    🍫 Your favorite snacks on demand<br>
-    🏠 A safe place in my arms<br>
-    🌸 Constant support & laughs<br>
-    ❤️ Being loved exactly as you are
+    <div class="terms-item">💖 <span>Unlimited cuddles, surprise hugs & soft kisses</span></div>
+    <div class="terms-item">🍫 <span>Random chocolates, stolen hoodies & shared desserts</span></div>
+    <div class="terms-item">👂 <span>Listening, understanding & never invalidating your feelings</span></div>
+    <div class="terms-item">🌱 <span>Growing together — dreams, struggles & everything in between</span></div>
+    <div class="terms-item">❤️ <span>Being deeply loved by someone who's serious about you</span></div>
   </div>
 
-  <button id="agreeBtn" style="background: var(--primary-pink); color: white; width: 100%;">I Do ❤️</button>
+  <button id="agreeBtn" style="background: var(--primary-pink); color: white; width: 100%;">YES❤️</button>
 </div>
 
-<div id="step3" class="card hidden" style="display:none;">
+<div id="step3" class="card" style="display:none; opacity:0;">
   <div class="heart-main">💖</div>
-  <h1>You Made Me the Happiest!</h1>
-  <p>I can't wait to make more memories with you.</p>
-  <p style="font-size: 1.5em; color: #ff4d6d; margin-top: 20px;">Happy Valentine’s Day! 🌹</p>
+  <h1>It's Official!</h1>
+  <p>You've made yours best decision of your life.</p>
+  <p style="font-size: 1.3em; color: #ff4d6d; margin-top: 15px; font-weight: bold;">Happy Valentine’s Day! 🌹</p>
 </div>
 
 <script>
-  // Create background floating hearts
   function createHeart() {
     const heart = document.createElement("div");
-    heart.innerHTML = "❤️";
+    heart.innerHTML = ["❤️", "💖", "🌸", "✨"][Math.floor(Math.random() * 4)];
     heart.style.position = "fixed";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animation = `float ${Math.random() * 3 + 2}s linear forwards`;
-    heart.style.fontSize = Math.random() * 20 + 10 + "px";
-    heart.style.opacity = Math.random();
+    heart.style.animation = `float ${Math.random() * 3 + 3}s linear forwards`;
+    heart.style.fontSize = Math.random() * 15 + 15 + "px";
+    heart.style.zIndex = "0";
     document.getElementById("heartPool").appendChild(heart);
     setTimeout(() => heart.remove(), 5000);
   }
-  setInterval(createHeart, 300);
+  setInterval(createHeart, 400);
 
   const noBtn = document.getElementById("noBtn");
   const yesBtn = document.getElementById("yesBtn");
@@ -177,41 +188,44 @@
   const container = document.getElementById("container");
 
   let scale = 1;
-  let moveCount = 0;
 
-  function moveNo() {
-    moveCount++;
-    const maxX = container.clientWidth - noBtn.offsetWidth;
-    const maxY = 150; // Increased range for vertical movement
+  function runAway(e) {
+    if(e) e.preventDefault();
+    const padding = 15;
+    const maxX = container.clientWidth - noBtn.offsetWidth - padding;
+    const maxY = container.clientHeight - noBtn.offsetHeight - padding;
     
-    noBtn.style.position = 'absolute';
-    noBtn.style.left = Math.random() * maxX + "px";
-    noBtn.style.top = (Math.random() * maxY - 50) + "px";
+    noBtn.style.left = `${Math.random() * maxX}px`;
+    noBtn.style.top = `${Math.random() * maxY}px`;
 
-    // Make "Yes" grow bigger and more enticing
-    scale += 0.15;
+    scale += 0.25;
     yesBtn.style.transform = `scale(${scale})`;
     
-    if(moveCount > 5) {
-        noBtn.innerHTML = "You're getting closer... 😉";
-    }
+    const messages = ["Wrong way! 😜", "Try again!", "Nope!", "Over here!", "Wait! ❤️"];
+    noBtn.innerHTML = messages[Math.floor(Math.random() * messages.length)];
   }
 
-  noBtn.addEventListener("mouseover", moveNo);
-  noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); moveNo(); });
+  noBtn.addEventListener("touchstart", runAway, {passive: false});
+  noBtn.addEventListener("pointerdown", runAway);
+  noBtn.onclick = (e) => e.preventDefault();
 
   yesBtn.onclick = () => {
-    step1.style.display = "none";
-    step2.style.display = "block";
-    setTimeout(() => step2.style.opacity = 1, 50);
+    step1.style.opacity = "0";
+    setTimeout(() => {
+      step1.style.display = "none";
+      step2.style.display = "block";
+      setTimeout(() => step2.style.opacity = "1", 50);
+    }, 400);
   };
 
   document.getElementById("agreeBtn").onclick = () => {
-    step2.style.display = "none";
-    step3.style.display = "block";
-    setTimeout(() => step3.style.opacity = 1, 50);
-    // Burst of hearts
-    for(let i=0; i<30; i++) setTimeout(createHeart, i*50);
+    step2.style.opacity = "0";
+    setTimeout(() => {
+      step2.style.display = "none";
+      step3.style.display = "block";
+      setTimeout(() => step3.style.opacity = "1", 50);
+      for(let i=0; i<30; i++) setTimeout(createHeart, i*100);
+    }, 400);
   };
 </script>
 
