@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>For You ❤️</title>
+
   <style>
     body {
       margin: 0;
-      padding: 0;
       height: 100vh;
       background: linear-gradient(135deg, #ff758c, #ff7eb3);
       display: flex;
@@ -15,7 +15,6 @@
       align-items: center;
       font-family: 'Segoe UI', sans-serif;
       color: white;
-      text-align: center;
       overflow: hidden;
     }
 
@@ -29,10 +28,11 @@
       backdrop-filter: blur(10px);
       animation: fadeIn 1.5s ease;
       position: relative;
+      text-align: center;
     }
 
     h1 { font-size: 2.2em; margin-bottom: 10px; }
-    h2 { font-size: 1.5em; color: #fff; }
+    h2 { font-size: 1.5em; }
     p { font-size: 1.1em; line-height: 1.6; }
 
     .heart {
@@ -43,11 +43,8 @@
 
     .btn-container {
       margin-top: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      min-height: 50px;
+      position: relative;
+      height: 60px;
     }
 
     button {
@@ -59,13 +56,19 @@
       background: white;
       color: #ff4d6d;
       font-weight: bold;
-      transition: all 0.2s ease;
+      transition: transform 0.2s ease;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    #yesBtn {
+      position: relative;
+      z-index: 2;
     }
 
     #noBtn {
       position: absolute;
-      z-index: 999;
+      right: 0;
+      z-index: 1;
     }
 
     .terms-list {
@@ -75,7 +78,9 @@
       font-size: 0.95em;
     }
 
-    .hidden { display: none; }
+    .hidden {
+      display: none;
+    }
 
     @keyframes beat {
       0%, 100% { transform: scale(1); }
@@ -88,6 +93,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <div id="step1" class="card">
@@ -95,23 +101,23 @@
     <p>I don’t know when it started, but talking to you became my favorite part of the day.</p>
     <div class="heart">❤️</div>
     <h2>Will you be my Valentine? 💌</h2>
-    
+
     <div class="btn-container">
-      <button id="yesBtn" onclick="showTerms()">Yes 😊</button>
-      <button id="noBtn" onmouseover="moveButton()">No</button>
+      <button id="yesBtn">Yes 😊</button>
+      <button id="noBtn">No</button>
     </div>
   </div>
 
   <div id="step2" class="card hidden">
     <h1>Wait! 📝</h1>
-    <p>By clicking "I Agree," you are officially accepting the following Terms & Conditions:</p>
-    
+    <p>By clicking "I Agree," you accept the following Terms & Conditions:</p>
+
     <div class="terms-list">
       • ♾️ Unlimited hugs on demand<br>
       • 🍫 24/7 access to my snacks<br>
-      • 🍕 resposibilty of giving you fast-food.<br>
-      • 💌 Someone who will always listen to you<br>
-      • ❤️ 100% of my attention and care
+      • 🍕 Responsibility for surprise fast food<br>
+      • 💌 Someone who always listens<br>
+      • ❤️ 100% attention & care
     </div>
 
     <button onclick="showSuccess()">I Agree & Yes! ❤️</button>
@@ -120,37 +126,44 @@
   <div id="step3" class="card hidden">
     <div class="heart">💖</div>
     <h1>It's Official!</h1>
-    <p>Congrats, you have made the best decision of your life!!</p>
-    <p>Happy Valentine's Day! ✨</p>
+    <p>You officially stole my heart 🥰</p>
+    <p>Happy Valentine’s Day ✨</p>
   </div>
 
   <script>
-    let yesSize = 1;
+    let yesScale = 1;
 
-    function moveButton() {
-      const noBtn = document.getElementById('noBtn');
-      const yesBtn = document.getElementById('yesBtn');
-      
-      // Move the No button
-      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-      
-      noBtn.style.left = x + 'px';
-      noBtn.style.top = y + 'px';
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const container = document.querySelector(".btn-container");
 
-      // Make the Yes button bigger every time she tries to click No
-      yesSize += 0.15;
-      yesBtn.style.transform = `scale(${yesSize})`;
+    function moveNoButton() {
+      const maxX = container.clientWidth - noBtn.offsetWidth;
+      const maxY = container.clientHeight - noBtn.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      yesScale = Math.min(yesScale + 0.1, 1.6);
+      yesBtn.style.transform = `scale(${yesScale})`;
     }
 
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("touchstart", moveNoButton);
+
+    yesBtn.addEventListener("click", showTerms);
+
     function showTerms() {
-      document.getElementById('step1').classList.add('hidden');
-      document.getElementById('step2').classList.remove('hidden');
+      step1.classList.add("hidden");
+      step2.classList.remove("hidden");
     }
 
     function showSuccess() {
-      document.getElementById('step2').classList.add('hidden');
-      document.getElementById('step3').classList.remove('hidden');
+      step2.classList.add("hidden");
+      step3.classList.remove("hidden");
     }
   </script>
 
